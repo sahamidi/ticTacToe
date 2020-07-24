@@ -1,0 +1,30 @@
+*, *::after, *::before{
+box-sizing: border-box;
+}
+:root{
+    --cellSize: 100px;
+    --tokenSize: cal(var(--cellSize*.9))
+
+}
+
+.cell {
+    width: var(--cellSize);
+    height: var(--cellSize);
+    border-color: #000fff;
+    border-style: solid;
+    background-color: black;
+}
+
+body {
+    margin: 0;
+
+}
+
+#board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(3,auto);
+}

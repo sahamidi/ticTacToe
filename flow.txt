@@ -1,0 +1,5 @@
+User goes to website
+Each player enters information
+    Name
+    Token for game (X,O)
+    If they have played before they will have a score
