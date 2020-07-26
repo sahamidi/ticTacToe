@@ -9,9 +9,25 @@
     
 </head>
 <body>
-    <h1> this is a test</h1>
+    <h1> Enter Player Name to Start the Game</h1>
+    <form id="playerOne" type="text">
+        Player One: 
+
+        <input class="playerName" type="text">
+        <button id= "buttonP1">Enter Player1</button>
+    </form>
+    <form id="playerTwo" type="text">
+        Player Two:
+
+        <input id="playerName" type="text">
+        <button id= "buttonP1">Enter Player2</button>
+    </form>
+    <div>
+        <h1> Player X is</h1>
+        <h1>Player O is</h1>
+    </div>
     <div id = "board" class = "boardMain"> </div>
-    <div id = "winner">
+    <div class = "winner" id = "winner">
         <div id = "announceWinner">
             X Wins!! Play again
         </div>
