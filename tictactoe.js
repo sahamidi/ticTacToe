@@ -24,15 +24,21 @@ for (i=0; i<=8; i++)
     cell.id = "cell-" + i
     document.getElementById("board").appendChild(cell)
     cell.setAttribute("class", "cell")
+    function applyOToken()
+        {
+            document.getElementById(cell.id).addEventListener('click', function circleMark(){})
+        }
+    
 }
 
+applyOToken(i)
 //Begin game by clearing the board
 function startGame()
 {
     document.querySelector(".winner").style.display = "none"
     for (i=0; i<=8; i++)
         {
-            document.getElementById(`cell-$(i)`).setAttribute('class', 'cell')
+            document.getElementById(`cell-${i})`).setAttribute('class', 'cell')
         }
 }
 
@@ -40,12 +46,29 @@ function startGame()
 //Apply 'X' token when x plays
 function xMark(i)
 {
-    if (document.getElementById(`cell-$(i)`).className(`cell`))
+    if (document.getElementById(`cell-${i}`).className()='cell')
     {
-        alert(`Choose an empty spot`)
+        document.getElementById(`cell-${i}`).setAttribute('class', 'cell x')
+        
     }
     else 
     {    
-        document.getElementById(`cell-$(i)`).setAttribute('class', 'cell x')
+        alert(`Choose an empty spot`) 
     }
 }
+
+//Apply 'O' token when circle plays
+function circleMark(i)
+{
+    if (document.getElementById(`cell-${i}`).className.includes('cell'))
+    {
+        document.getElementById(`cell-${i}`).setAttribute('class', 'cell circle')
+        
+    }
+    else 
+    {    
+        alert(`Choose an empty spot`)
+    }
+}
+
+
