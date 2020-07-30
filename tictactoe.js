@@ -16,7 +16,7 @@ let arrayOfWinner = [
     [gameBoard[3]==gameBoard[4]==gameBoard[5]]
 
 ]
-startGame()
+
 
 //Render items to the board
 for (i=0; i<=8; i++)
@@ -29,8 +29,20 @@ for (i=0; i<=8; i++)
 
 }
 
-document.querySelectorAll('.cell').forEach(item => {item.addEventListener('click',
-))
+// document.querySelectorAll('.cell').forEach(item => {item.addEventListener('click', function(){'element'.
+// setAttribute('class', 'cell circle')}
+// ))
+
+
+
+document.addEventListener('click', function (event) {
+    if ( event.target.classList.contains( 'cell' ) ) {
+        event.currentTarget.setAttribute('click', 'cell circle')
+    }
+}, false);
+
+
+
 
 //Begin game by clearing the board
 function startGame()
