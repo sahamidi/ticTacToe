@@ -16,6 +16,7 @@ let arrayOfWinner = [
     [gameBoard[3]==gameBoard[4]==gameBoard[5]]
 
 ]
+startGame()
 
 //Render items to the board
 for (i=0; i<=8; i++)
@@ -24,51 +25,19 @@ for (i=0; i<=8; i++)
     cell.id = "cell-" + i
     document.getElementById("board").appendChild(cell)
     cell.setAttribute("class", "cell")
-    function applyOToken()
-        {
-            document.getElementById(cell.id).addEventListener('click', function circleMark(){})
-        }
-    
+    gameBoard.push(cell.id) 
+
 }
 
-applyOToken(i)
+document.querySelectorAll('.cell').forEach(item => {item.addEventListener('click',
+))
+
 //Begin game by clearing the board
 function startGame()
 {
     document.querySelector(".winner").style.display = "none"
     for (i=0; i<=8; i++)
         {
-            document.getElementById(`cell-${i})`).setAttribute('class', 'cell')
+            document.getElementById(`cell-$(i)`).setAttribute('class', 'cell')
         }
 }
-
-
-//Apply 'X' token when x plays
-function xMark(i)
-{
-    if (document.getElementById(`cell-${i}`).className()='cell')
-    {
-        document.getElementById(`cell-${i}`).setAttribute('class', 'cell x')
-        
-    }
-    else 
-    {    
-        alert(`Choose an empty spot`) 
-    }
-}
-
-//Apply 'O' token when circle plays
-function circleMark(i)
-{
-    if (document.getElementById(`cell-${i}`).className.includes('cell'))
-    {
-        document.getElementById(`cell-${i}`).setAttribute('class', 'cell circle')
-        
-    }
-    else 
-    {    
-        alert(`Choose an empty spot`)
-    }
-}
-
-
