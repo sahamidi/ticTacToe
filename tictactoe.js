@@ -17,16 +17,28 @@ let arrayOfWinner = [
 
 ]
 
+function handleCellClick(event, cellNumber)
+{
+    //apply click to the game state
+    console.log(event)
+}
 
 //Render items to the board
-for (i=0; i<=8; i++)
+for (let i=0; i<=8; i++)
 {
     let cell = document.createElement("div")
     cell.id = "cell-" + i
     document.getElementById("board").appendChild(cell)
     cell.setAttribute("class", "cell")
     gameBoard.push(cell.id) 
+    //event listeners, are expected to be passed an object function when activatedtakes two argument
+    //take first argument, which is click, the second argument is a function to be called when function happens
+    //contract between you and add event listener add event listener will call your function with that event
 
+    cell.addEventListener('click', function(e)
+    {
+        handleCellClick(e, i)
+    })
 }
 
 // document.querySelectorAll('.cell').forEach(item => {item.addEventListener('click', function(){'element'.
