@@ -17,27 +17,7 @@ let arrayOfWinner = [
 
 ]
 
-//run game until winner is defined.
-while((arrayOfWinner[0][0]||arrayOfWinner[1][0]||arrayOfWinner[2][0]||arrayOfWinner[3][0]||
-    arrayOfWinner[4][0]||arrayOfWinner[5][0]||arrayOfWinner[6][0]||arrayOfWinner[7][0])== false)
-{
-    alert('sal rocks')
-}
 
-
-function handleCellClick(event, cellNumber)
-{
-    cellON = document.getElementById(`cell-${cellNumber}`)
-    cellON.setAttribute('class', xToken)
-    //apply click to the game state
-    // which turn is it?
-    // who's turn is it?
-    // what is there marker? (X or O)
-    // apply that marker to cellNNUM
-}
-
-
-//Render items to the board
 for (let i=0; i<=8; i++)
 {
     let cell = document.createElement("div")
@@ -57,6 +37,36 @@ for (let i=0; i<=8; i++)
         handleCellClick(e, i)
     })
 }
+
+//run game until winner is defined.
+while((arrayOfWinner[0][0]&&arrayOfWinner[1][0]&&arrayOfWinner[2][0]&&arrayOfWinner[3][0]&&
+    arrayOfWinner[4][0]&&arrayOfWinner[5][0]&&arrayOfWinner[6][0]&&arrayOfWinner[7][0])== false)
+{
+//xToken is represented by odd values and circle tokens represented by even values
+
+ let count = 1
+ let whosTurn = (count % 2 !== 0) ? xToken:circleToken
+ count++
+
+ function handleCellClick(event, cellNumber)
+{
+    cellON = document.getElementById(`cell-${cellNumber}`)
+    cellON.setAttribute('class', whosTurn)
+    gameBoard[i].push(whosTurn)
+    //apply click to the game state
+    // which turn is it?
+    // who's turn is it?
+    // what is there marker? (X or O)
+    // apply that marker to cellNNUM
+}
+
+}
+
+
+
+
+//Render items to the board
+
 
 // document.querySelectorAll('.cell').forEach(item => {item.addEventListener('click', function(){'element'.
 // setAttribute('class', 'cell circle')}
