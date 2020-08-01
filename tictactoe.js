@@ -1,4 +1,4 @@
-let circleToken = "cell cirlce"
+let circleToken = "cell circle"
 let xToken = "cell x"
 let playerWin
 
@@ -6,14 +6,14 @@ let playerWin
 //Hold cell of game to check for winner and for tie.
 let gameBoard = []
 let arrayOfWinner = [
-    [gameBoard[0]==gameBoard[1]==gameBoard[2]],
-    [gameBoard[0]==gameBoard[3]==gameBoard[6]],
-    [gameBoard[0]==gameBoard[4]==gameBoard[8]],
-    [gameBoard[1]==gameBoard[4]==gameBoard[7]],
-    [gameBoard[2]==gameBoard[4]==gameBoard[6]],
-    [gameBoard[2]==gameBoard[5]==gameBoard[8]],
-    [gameBoard[6]==gameBoard[7]==gameBoard[8]],
-    [gameBoard[3]==gameBoard[4]==gameBoard[5]]
+    [gameBoard[0]==gameBoard[1]&&gameBoard[0]==gameBoard[2]],
+    [gameBoard[0]==gameBoard[3]&&gameBoard[0]==gameBoard[6]],
+    [gameBoard[0]==gameBoard[4]&&gameBoard[0]==gameBoard[8]],
+    [gameBoard[1]==gameBoard[4]&&gameBoard[1]==gameBoard[7]],
+    [gameBoard[2]==gameBoard[4]&&gameBoard[2]==gameBoard[6]],
+    [gameBoard[2]==gameBoard[5]&&gameBoard[2]==gameBoard[8]],
+    [gameBoard[6]==gameBoard[7]&&gameBoard[6]==gameBoard[8]],
+    [gameBoard[3]==gameBoard[4]&&gameBoard[3]==gameBoard[5]]
 
 ]
 
@@ -39,30 +39,30 @@ for (let i=0; i<=8; i++)
 }
 
 //run game until winner is defined.
-
+let count = 1
+let whosTurn 
 function handleCellClick(event, cellNumber)
 {
-    while((arrayOfWinner[0][0]&&arrayOfWinner[1][0]&&arrayOfWinner[2][0]&&arrayOfWinner[3][0]&&
-        arrayOfWinner[4][0]&&arrayOfWinner[5][0]&&arrayOfWinner[6][0]&&arrayOfWinner[7][0]) == true)
-    {
-    //xToken is represented by odd values and circle tokens represented by even values
-    
-     let count = 1
+     
      let whosTurn = (count % 2 !== 0) ? xToken:circleToken
-     count++
-     return whosTurn
     
-    }
 
             cellON = document.getElementById(`cell-${cellNumber}`)
             cellON.setAttribute('class', whosTurn)
-            gameBoard[i].push(whosTurn)
+            gameBoard[cellNumber]= whosTurn
             //apply click to the game state
             // which turn is it?
             // who's turn is it?
             // what is there marker? (X or O)
             // apply that marker to cellNNUM
+
+            return count = count + 1
 }
+
+// while((arrayOfWinner[0][0]&&arrayOfWinner[1][0]&&arrayOfWinner[2][0]&&arrayOfWinner[3][0]&&
+//     arrayOfWinner[4][0]&&arrayOfWinner[5][0]&&arrayOfWinner[6][0]&&arrayOfWinner[7][0]) == true)
+// {
+//xToken is represented by odd values and circle tokens represented by even values
 
 
 //Render items to the board
