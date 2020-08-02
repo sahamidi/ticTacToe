@@ -6,7 +6,7 @@ let playerWin
 //Hold cell of game to check for winner and for tie.
 let gameBoard = []
 let arrayOfWinner = [
-    [gameBoard[0]==gameBoard[1]&&gameBoard[0]==gameBoard[2]],
+    (gameBoard[0]==gameBoard[1])&&(gameBoard[0]==gameBoard[2]),
     [gameBoard[0]==gameBoard[3]&&gameBoard[0]==gameBoard[6]],
     [gameBoard[0]==gameBoard[4]&&gameBoard[0]==gameBoard[8]],
     [gameBoard[1]==gameBoard[4]&&gameBoard[1]==gameBoard[7]],
@@ -55,9 +55,25 @@ function handleCellClick(event, cellNumber)
             // who's turn is it?
             // what is there marker? (X or O)
             // apply that marker to cellNNUM
-
+            checkGame()
             return count = count + 1
+            
 }
+
+
+function checkGame()
+{
+    let  arrayCheck = (gameBoard.includes('cell x') && gameBoard.includes('cell circle')) ? true:false;
+    while (arrayCheck == true)
+    {
+        if (arrayOfWinner[1]||arrayOfWinner[2]||arrayOfWinner[3]||arrayOfWinner[4]||arrayOfWinner[5]||
+            arrayOfWinner[6]||arrayOfWinner[7]||arrayOfWinner[8] == true)
+            {
+                alert("Game Over")
+            }
+    }
+}
+
 
 // while((arrayOfWinner[0][0]&&arrayOfWinner[1][0]&&arrayOfWinner[2][0]&&arrayOfWinner[3][0]&&
 //     arrayOfWinner[4][0]&&arrayOfWinner[5][0]&&arrayOfWinner[6][0]&&arrayOfWinner[7][0]) == true)
