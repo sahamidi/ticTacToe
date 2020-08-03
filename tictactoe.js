@@ -5,17 +5,8 @@ let playerWin
 
 //Hold cell of game to check for winner and for tie.
 let gameBoard = []
-let arrayOfWinner = [
-    (gameBoard[0]==gameBoard[1])&&(gameBoard[0]==gameBoard[2]),
-    [gameBoard[0]==gameBoard[3]&&gameBoard[0]==gameBoard[6]],
-    [gameBoard[0]==gameBoard[4]&&gameBoard[0]==gameBoard[8]],
-    [gameBoard[1]==gameBoard[4]&&gameBoard[1]==gameBoard[7]],
-    [gameBoard[2]==gameBoard[4]&&gameBoard[2]==gameBoard[6]],
-    [gameBoard[2]==gameBoard[5]&&gameBoard[2]==gameBoard[8]],
-    [gameBoard[6]==gameBoard[7]&&gameBoard[6]==gameBoard[8]],
-    [gameBoard[3]==gameBoard[4]&&gameBoard[3]==gameBoard[5]]
+let arrayOfWinner = []
 
-]
 
 
 for (let i=0; i<=8; i++)
@@ -55,26 +46,51 @@ function handleCellClick(event, cellNumber)
             // who's turn is it?
             // what is there marker? (X or O)
             // apply that marker to cellNNUM
-            checkGame()
+            // checkGame()
+            // RERUN STATE OF ARRAYOFWINNER
+            updateGameStatus()
+            checkWinner()
             return count = count + 1
             
 }
 
-
-function checkGame()
+function updateGameStatus()
 {
-    let  arrayCheck = (gameBoard.includes('cell x') && gameBoard.includes('cell circle')) ? true:false;
-    while (arrayCheck == true)
-    {
-        if (arrayOfWinner[1]||arrayOfWinner[2]||arrayOfWinner[3]||arrayOfWinner[4]||arrayOfWinner[5]||
-            arrayOfWinner[6]||arrayOfWinner[7]||arrayOfWinner[8] == true)
-            {
-                alert("Game Over")
-            }
-    }
+    arrayOfWinner = [
+        gameBoard[0] == gameBoard[1] && gameBoard[0] == gameBoard[2],
+        gameBoard[0] == gameBoard[3] && gameBoard[0] == gameBoard[6],
+        gameBoard[0] == gameBoard[4] && gameBoard[0] == gameBoard[8],
+        gameBoard[1] == gameBoard[4] && gameBoard[1] == gameBoard[7],
+        gameBoard[2] == gameBoard[4] && gameBoard[2] == gameBoard[6],
+        gameBoard[2] == gameBoard[5] && gameBoard[2] == gameBoard[8],
+        gameBoard[6] == gameBoard[7] && gameBoard[6] == gameBoard[8],
+        gameBoard[3] == gameBoard[4] && gameBoard[3] == gameBoard[5]
+    
+    ]
 }
 
+function checkWinner ()
+{
+    if (arrayOfWinner.includes(true))
+    {
+        window.alert("winner exists");
+    }
+}
+// function checkGame()
+// {
+//     let  arrayCheck = (gameBoard.includes('cell x') && gameBoard.includes('cell circle')) ? true:false;
+//     while (arrayCheck == true)
+//     {
+//         if (arrayOfWinner[1]||arrayOfWinner[2]||arrayOfWinner[3]||arrayOfWinner[4]||arrayOfWinner[5]||
+//             arrayOfWinner[6]||arrayOfWinner[7]||arrayOfWinner[8] == true)
+//             {
+//                 alert("Game Over")
+//             }
+//     }
+// }
 
+//MAKE A FUNCTION THAT, CHECKS THE VALUES, OF ARRAY OF WINNER, LET ARRAY OF WINNER = [] ARRAY
+//CALL THE FUNCTION ON USER ON CLICK
 // while((arrayOfWinner[0][0]&&arrayOfWinner[1][0]&&arrayOfWinner[2][0]&&arrayOfWinner[3][0]&&
 //     arrayOfWinner[4][0]&&arrayOfWinner[5][0]&&arrayOfWinner[6][0]&&arrayOfWinner[7][0]) == true)
 // {
