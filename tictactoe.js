@@ -19,7 +19,7 @@ for (let i=0; i<=8; i++)
     // alternatively
     cell.setAttribute("name", `${i}`)
     
-    gameBoard.push(cell.id) 
+    gameBoard.push("") 
     //event listeners, are expected to be passed an object function when activatedtakes two argument
     //take first argument, which is click, the second argument is a function to be called when function happens
     //contract between you and add event listener add event listener will call your function with that event
@@ -75,12 +75,13 @@ let winningPatterns = [
 
 function findWinner()
 {
-    if (arrayOfWinner.includes = true)
+    let gameBoardEmpty = gameBoard.includes("")
+    if (arrayOfWinner.includes == true)
     {
         updateGameStatus()
         for (i=0; i <= arrayOfWinner.length; i++)
         {
-            if (arrayOfWinner[i] == true)
+            if (arrayOfWinner[i] == true )
             {
                 function winnerIs() 
                 {
@@ -91,9 +92,13 @@ function findWinner()
                 console.log(winnerIs())
             }
         }
+    }    
+        else if (gameBoardEmpty == false)
+        {
+            console.log("Game Is Tied")
+        }
+}  
     
-    }
-}
 
 function startGame()
 {
