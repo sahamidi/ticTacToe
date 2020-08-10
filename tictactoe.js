@@ -30,6 +30,9 @@ for (let i=0; i<=8; i++)
     })
 }
 
+
+
+
 //run game until winner is defined.
 let count = 1
 let whosTurn 
@@ -74,33 +77,39 @@ function findWinner()
                         {
                             document.getElementById("winner").style.display = 'block'; 
                             document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
+                            document.getElementById('replay').addEventListener('click', startGame)
                         }   
                         else if (gameBoard[winningPatterns[i][0]] == "cell circle")
                         {
                             document.getElementById("winner").style.display = 'block'; 
                             document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
+                            document.getElementById('replay').addEventListener('click', startGame)
                         }     
                     }
             }
         }
 }      
 
+
 function checkTie()
     {
+        let thisCounter = 0 
         for (i=0; i <= gameBoard.length; i++)
         {
-            let thisCounter = 0 
+            
             if (gameBoard[i] == "cell circle" || gameBoard[i] == "cell x")
             {
-                thisCounter = thisCounter++
+                thisCounter = thisCounter+1
+                if (thisCounter == 8)   
+                {
+                    document.getElementById("winner").style.display = 'block'; 
+                    document.getElementById("announceWinner").innerText = "You tied. click to Replay"
+                    document.getElementById('replay').addEventListener('click', startGame)
+                }    
             }
-            return thisCounter
+
         }
-        if (thisCounter == 8)   
-        {
-            document.getElementById("winner").style.display = 'block'; 
-            document.getElementById("announceWinner").innerText = "You tied. click to Replay"
-        }    
+
     }
 
 function startGame()
@@ -109,5 +118,6 @@ function startGame()
     for (i=0; i<=8; i++)
         {
             document.getElementById(`cell-${i}`).setAttribute('class', 'cell')
+            gameBoard = []
         }
 }
