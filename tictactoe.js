@@ -42,24 +42,9 @@ function handleCellClick(event, cellNumber)
             cellON = document.getElementById(`cell-${cellNumber}`)
             cellON.setAttribute('class', whosTurn)
             gameBoard[cellNumber]= whosTurn
-            updateGameStatus()
             findWinner()
             return count = count + 1
             
-}
-
-function updateGameStatus()
-{
-    arrayOfWinner = [
-        gameBoard[0] == gameBoard[1] && gameBoard[0] == gameBoard[2],
-        gameBoard[0] == gameBoard[3] && gameBoard[0] == gameBoard[6],
-        gameBoard[0] == gameBoard[4] && gameBoard[0] == gameBoard[8],
-        gameBoard[1] == gameBoard[4] && gameBoard[1] == gameBoard[7],
-        gameBoard[2] == gameBoard[4] && gameBoard[2] == gameBoard[6],
-        gameBoard[2] == gameBoard[5] && gameBoard[2] == gameBoard[8],
-        gameBoard[6] == gameBoard[7] && gameBoard[6] == gameBoard[8],
-        gameBoard[3] == gameBoard[4] && gameBoard[3] == gameBoard[5]]
-    
 }
 
 let winningPatterns = [
@@ -75,36 +60,26 @@ let winningPatterns = [
 
 function findWinner()
 {
-    let gameBoardEmpty = gameBoard.includes("")
-    if (arrayOfWinner.includes == true)
-    {
-        updateGameStatus()
-        for (i=0; i <= arrayOfWinner.length; i++)
+        for (i=0; i < winningPatterns.length; i++)
         {
-            if (arrayOfWinner[i] == true )
+            if (gameBoard[winningPatterns[i][0]] != "")
             {
-                function winnerIs() 
-                {
-                return   gameBoard[winningPatterns[i][0]] == 'cell x' ? "X Wins" 
-                :gameBoard[winningPatterns[i][0]] == 'cell circle' ? "Circle Wins"
-                :"";
-                } 
-                console.log(winnerIs())
+                   if( gameBoard[winningPatterns[i][0]] ==
+                    gameBoard[winningPatterns[i][1]] &&
+                    gameBoard[winningPatterns[i][1]] ==
+                    gameBoard[winningPatterns[i][2]])
+                    {
+                    console.log(gameBoard[winningPatterns[i][0]])
+                    }
             }
         }
-    }    
-        else if (gameBoardEmpty == false)
-        {
-            console.log("Game Is Tied")
-        }
-}  
-    
+}                
 
 function startGame()
 {
     document.querySelector(".winner").style.display = "none"
     for (i=0; i<=8; i++)
         {
-            document.getElementById(`cell-$(i)`).setAttribute('class', 'cell')
+            document.getElementById(`cell-${i}`).setAttribute('class', 'cell')
         }
 }
