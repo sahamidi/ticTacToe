@@ -43,6 +43,7 @@ function handleCellClick(event, cellNumber)
             cellON.setAttribute('class', whosTurn)
             gameBoard[cellNumber]= whosTurn
             findWinner()
+            checkTie()
             return count = count + 1
             
 }
@@ -69,11 +70,38 @@ function findWinner()
                     gameBoard[winningPatterns[i][1]] ==
                     gameBoard[winningPatterns[i][2]])
                     {
-                    console.log(gameBoard[winningPatterns[i][0]])
+                        if (gameBoard[winningPatterns[i][0]] == "cell x")
+                        {
+                            document.getElementById("winner").style.display = 'block'; 
+                            document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
+                        }   
+                        else if (gameBoard[winningPatterns[i][0]] == "cell circle")
+                        {
+                            document.getElementById("winner").style.display = 'block'; 
+                            document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
+                        }     
                     }
             }
         }
-}                
+}      
+
+function checkTie()
+    {
+        for (i=0; i <= gameBoard.length; i++)
+        {
+            let thisCounter = 0 
+            if (gameBoard[i] == "cell circle" || gameBoard[i] == "cell x")
+            {
+                thisCounter = thisCounter++
+            }
+            return thisCounter
+        }
+        if (thisCounter == 8)   
+        {
+            document.getElementById("winner").style.display = 'block'; 
+            document.getElementById("announceWinner").innerText = "You tied. click to Replay"
+        }    
+    }
 
 function startGame()
 {
