@@ -1,8 +1,9 @@
 let circleToken = "cell circle"
 let xToken = "cell x"
-let playerWin 
 //Hold cell of game to check for winner and for tie.
 let gameBoard = []
+let xPlayer = []
+let circlePlayer = []
 
 //Start Game function to clear the board for new game
 function startGame()
@@ -30,6 +31,8 @@ for (let i=0; i<=8; i++)
     cell.setAttribute("name", `${i}`)
     //Begin board with empty set array of gameBoard tokens with neither x or circle
     gameBoard.push("") 
+    xPlayer.push("")
+    circlePlayer.push("")
     /*
     Event listener to establish token turn, check for winners, check for ties.  This is 
     applied to each cell, and identified per div element which makes up the cell.
@@ -47,75 +50,129 @@ let whosTurn
 function handleCellClick(event, cellNumber)
 {
      let whosTurn = (count % 2 !== 0) ? xToken:circleToken
-            cellON = document.getElementById(`cell-${cellNumber}`)
+            let cellON = document.getElementById(`cell-${cellNumber}`)
             cellON.setAttribute('class', whosTurn)
             gameBoard[cellNumber]= whosTurn
-            findWinner()
-            checkTie()
+            if (whosTurn == xToken)
+            {
+                xPlayer[cellNumber] = cellNumber
+            } 
+            else if (whosTurn == circleToken)
+            {
+                circlePlayer[cellNumber] == cellNumber
+            }
+            checkWinner2()
+            // findWinner()
+            // checkTie()
             return count = count + 1
 }
 
 /*Pre-establied patterns of winner options.  These are indexed in the find winner function
 along with gameBOard to see if it is a x or circle token*/
-let winningPatterns = [
-    [0,1,2],
-    [0,3,6],
-    [0,4,8],
-    [1,4,7],
-    [2,4,6],
-    [2,5,8],
-    [6,7,8],
-    [3,4,5],
-]
+
+function checkWinner2 ()
+{
+    let winningPatterns = [
+        [0,1,2],
+        [0,3,6],
+        [0,4,8],
+        [1,4,7],
+        [2,4,6],
+        [2,5,8],
+        [6,7,8],
+        [3,4,5],
+    ]
+    gameBoardEmptyCell = gameBoard.includes("")
+       if (gameBoardEmptyCell == true) 
+       {
+            for (let r=0; r < winningPatterns.length; r++)
+            {
+                let countX = 0;
+                let countCircle = 0;
+                for (let s=0; s<=2; s++)
+                {
+                    if (winningPatterns[r][s] == xPlayer[s])
+                    {
+                        countX = countX + 1;
+                    }
+                    if (winningPatterns[r][s] == circlePlayer[s])
+                    {
+                        countCircle = countCircle + 1;
+                    }
+                    if (countCircle == 3)
+                    {
+                        console.log("Circle wins");
+                    }
+                    else if (countX == 3)
+                    {
+                        console.log("X wins");
+                    }   
+                }
+
+            }
+        } 
+        else
+        {
+            console.log("game tied")
+        }
+}
+
+
+
+
+
+
+
+
 
 /*loop to continuously check for winners by index of winningPattern and gameBoard
 */
-function findWinner()
-{
-        for (i=0; i < winningPatterns.length; i++)
-        {
-            if (gameBoard[winningPatterns[i][0]] != "")
-            {
-                   if( gameBoard[winningPatterns[i][0]] ==
-                    gameBoard[winningPatterns[i][1]] &&
-                    gameBoard[winningPatterns[i][1]] ==
-                    gameBoard[winningPatterns[i][2]])
-                    {
-                        if (gameBoard[winningPatterns[i][0]] == "cell x")
-                        {
-                            document.getElementById("winner").style.display = 'block'; 
-                            document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
-                            //Reset game and gameboard
-                            document.getElementById('replay').addEventListener('click', startGame)
-                        }   
-                        else if (gameBoard[winningPatterns[i][0]] == "cell circle")
-                        {
-                            document.getElementById("winner").style.display = 'block'; 
-                            document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
-                            //Reset game and gameboard
-                            document.getElementById('replay').addEventListener('click', startGame)
-                        }     
-                    }
-            }
-        }
-}      
+// function findWinner()
+// {
+//         for (let j=0; j < winningPatterns.length; j++)
+//         {
+//             if (gameBoard[winningPatterns[j][0]] != "")
+//             {
+//                    if( gameBoard[winningPatterns[j][0]] ==
+//                     gameBoard[winningPatterns[j][1]] &&
+//                     gameBoard[winningPatterns[j][1]] ==
+//                     gameBoard[winningPatterns[j][2]])
+//                     {
+//                         if (gameBoard[winningPatterns[j][0]] == "cell x")
+//                         {
+//                             document.getElementById("winner").style.display = 'block'; 
+//                             document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
+//                             //Reset game and gameboard
+//                             document.getElementById('replay').addEventListener('click', startGame)
+//                         }   
+//                         else if (gameBoard[winningPatterns[j][0]] == "cell circle")
+//                         {
+//                             document.getElementById("winner").style.display = 'block'; 
+//                             document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
+//                             //Reset game and gameboard
+//                             document.getElementById('replay').addEventListener('click', startGame)
+//                         }     
+//                     }
+//             }
+//         }
+// }      
 
-//Checking for tie each round
-function checkTie()
-    {
-        let thisCounter = 0 
-        for (i=0; i <= gameBoard.length; i++)
-        {            
-            if (gameBoard[i] == "cell circle" || gameBoard[i] == "cell x")
-            {
-                thisCounter = thisCounter+1
-                if (thisCounter == 8)   
-                {
-                    document.getElementById("winner").style.display = 'block'; 
-                    document.getElementById("announceWinner").innerText = "You tied. click to Replay"
-                    //Reset game and gamboard
-                    document.getElementById('replay').addEventListener('click', startGame)
-                }    
-            }
-        }
-    }
+// //Checking for tie each round
+// function checkTie()
+//     {
+//         let thisCounter = 0 
+//         for (k=0; k <= gameBoard.length; k++)
+//         {            
+//             if (gameBoard[k] == "cell circle" || gameBoard[k] == "cell x")
+//             {
+//                 thisCounter = thisCounter+1
+//                 if (thisCounter == 8)   
+//                 {
+//                     document.getElementById("winner").style.display = 'block'; 
+//                     document.getElementById("announceWinner").innerText = "You tied. click to Replay"
+//                     //Reset game and gamboard
+//                     document.getElementById('replay').addEventListener('click', startGame)
+//                 }    
+//             }
+//         }
+//     }
