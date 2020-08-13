@@ -46,11 +46,7 @@ for (let i=0; i<=8; i++)
         handleCellClick(e, i)
     })
 
-    
-
 }
-
-
 
 //Counter established to alternate turns in the game betweene x and circle
 let count = 1
@@ -58,22 +54,29 @@ let count = 1
 let whosTurn 
 function handleCellClick(event, cellNumber)
 {
-     let whosTurn = (count % 2 !== 0) ? xToken:circleToken
-            let cellON = document.getElementById(`cell-${cellNumber}`)
-            cellON.setAttribute('class', whosTurn)
-            gameBoard[cellNumber]= whosTurn
-            if (whosTurn == xToken)
-            {
-                xPlayer[cellNumber] = cellNumber
-            } 
-            else if (whosTurn == circleToken)
-            {
-                circlePlayer[cellNumber] = cellNumber
-            }
-            checkWinner2()
-            // findWinner()
-            // checkTie()
-            return count = count + 1
+    let cellON = document.getElementById(`cell-${cellNumber}`)
+    if (cellON.className != "cell")
+    {
+        alert("choose a an empty spot")
+    }
+    else
+    {
+        let whosTurn = (count % 2 !== 0) ? xToken:circleToken
+        cellON.setAttribute('class', whosTurn)
+        gameBoard[cellNumber]= whosTurn
+//Add to array for x and circle to check against index of winnning patterns
+        if (whosTurn == xToken)
+        {
+            xPlayer[cellNumber] = cellNumber
+        } 
+        else if (whosTurn == circleToken)
+        {
+            circlePlayer[cellNumber] = cellNumber
+        }
+        checkWinner2()
+        return count = count + 1
+    }
+ 
 }
 
 /*Pre-establied patterns of winner options.  These are indexed in the find winner function
