@@ -6,7 +6,7 @@ let xPlayer = []
 let circlePlayer = []
 
 //Start Game function to clear the board for new game
-function startGame()
+function refreshGame()
 {
     document.querySelector(".winner").style.display = "none"
     for (i=0; i<=8; i++)
@@ -18,7 +18,9 @@ function startGame()
             circlePlayer = [];
         }
 }
+
 playGame()
+
 function playGame ()
 {
 /*/Build out gameboard layout with functionality such as click events to apply either 
@@ -73,7 +75,7 @@ function handleCellClick(event, cellNumber)
         {
             circlePlayer[cellNumber] = cellNumber
         }
-        checkWinner2()
+        checkWinner()
         return count = count + 1
     }
  
@@ -82,7 +84,7 @@ function handleCellClick(event, cellNumber)
 /*Pre-establied patterns of winner options.  These are indexed in the find winner function
 along with gameBOard to see if it is a x or circle token*/
 
-function checkWinner2 ()
+function checkWinner ()
 {
     let winningPatterns = [
         [0,1,2],
@@ -116,14 +118,14 @@ function checkWinner2 ()
                         document.getElementById("winner").style.display = 'block'; 
                         document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
                         //Reset game and gameboard
-                        document.getElementById('replay').addEventListener('click', startGame);
+                        document.getElementById('replay').addEventListener('click', refreshGame);
                     }
                     else if (countX == 3)
                     {
                         document.getElementById("winner").style.display = 'block'; 
                         document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
                     //  Reset game and gameboard
-                        document.getElementById('replay').addEventListener('click', startGame);
+                        document.getElementById('replay').addEventListener('click', refreshGame);
                     }   
                 }
 
@@ -134,7 +136,7 @@ function checkWinner2 ()
             document.getElementById("winner").style.display = 'block'; 
             document.getElementById("announceWinner").innerText = "Tie Game!. click to Replay"
         //  Reset game and gameboard
-            document.getElementById('replay').addEventListener('click', startGame);
+            document.getElementById('replay').addEventListener('click', refreshGame);
         }
 }
 }
