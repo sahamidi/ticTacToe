@@ -5,6 +5,7 @@ let gameBoard = []
 let xPlayer = []
 let circlePlayer = []
 
+
 //Start Game function to clear the board for new game
 function refreshGame()
 {
@@ -64,6 +65,7 @@ function handleCellClick(event, cellNumber)
     else
     {
         let whosTurn = (count % 2 !== 0) ? xToken:circleToken
+        count = count + 1
         cellON.setAttribute('class', whosTurn)
         gameBoard[cellNumber]= whosTurn
 //Add to array for x and circle to check against index of winnning patterns
@@ -76,15 +78,40 @@ function handleCellClick(event, cellNumber)
             circlePlayer[cellNumber] = cellNumber
         }
         checkWinner()
-        return count = count + 1
+        
+
     }
  
 }
+}
 
-/*Pre-establied patterns of winner options.  These are indexed in the find winner function
-along with gameBOard to see if it is a x or circle token*/
+
 
 function checkWinner ()
+{
+
+    gameBoardEmptyCell = gameBoard.includes("")
+       if (gameBoardEmptyCell == true) 
+       {
+            whoWinner();
+        } 
+        else if (gameBoardEmptyCell == false)
+        {
+            whoWinner()
+            let WinnerExist = whoWinner()
+            if (WinnerExist == undefined)
+            {
+            document.getElementById("winner").style.display = 'block'; 
+            document.getElementById("announceWinner").innerText = "Tie Game!. click to Replay"
+        //  Reset game and gameboard
+            document.getElementById('replay').addEventListener('click', refreshGame);
+            }
+        }
+}
+
+let winnerIs;
+
+function whoWinner()
 {
     let winningPatterns = [
         [0,1,2],
@@ -96,10 +123,8 @@ function checkWinner ()
         [6,7,8],
         [3,4,5],
     ]
-    gameBoardEmptyCell = gameBoard.includes("")
-       if (gameBoardEmptyCell == true) 
-       {
-            for (let r=0; r < winningPatterns.length; r++)
+    
+    for (let r=0; r < winningPatterns.length; r++)
             {
                 let countX = 0;
                 let countCircle = 0;
@@ -119,25 +144,19 @@ function checkWinner ()
                         document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
                         //Reset game and gameboard
                         document.getElementById('replay').addEventListener('click', refreshGame);
+                        return winnerIs = "circle";
+                      
                     }
-                    else if (countX == 3)
+                    else if (countX == 3) 
                     {
                         document.getElementById("winner").style.display = 'block'; 
                         document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
                     //  Reset game and gameboard
                         document.getElementById('replay').addEventListener('click', refreshGame);
+                        return winnerIs = "x";
                     }   
+
                 }
 
             }
-        } 
-        else
-        {
-            document.getElementById("winner").style.display = 'block'; 
-            document.getElementById("announceWinner").innerText = "Tie Game!. click to Replay"
-        //  Reset game and gameboard
-            document.getElementById('replay').addEventListener('click', refreshGame);
-        }
 }
-}
-
