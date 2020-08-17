@@ -1,12 +1,11 @@
 let circleToken = "cell circle"
 let xToken = "cell x"
-//Hold cell of game to check for winner and for tie.
+//Empty arrays for game board, xplayer played spots and circle player game spots
 let gameBoard = []
 let xPlayer = []
 let circlePlayer = []
 
-
-//Start Game function to clear the board for new game
+//Refresh function to clear the board for new game
 function refreshGame()
 {
     document.querySelector(".winner").style.display = "none"
@@ -20,15 +19,38 @@ function refreshGame()
         }
 }
 
+
+//NEED HELP, WHY IS THIS BUBBLING UP TO TOP OF CODE. PURPOSE IS TO ADD PLAYERS, AND KEEP COUNT OF SCORE
+let addPlayers = document.getElementById('buttonPlayers')
+
+
+function addPlayer()
+{
+    let playerInput = document.getElementById('playerName1').value
+    return document.getElementById('player1Is').innerText = playerInput
+}
+
+addPlayers.addEventListener('click',addPlayer)
+
+
+
+
+
+
+
+
+
+
+
+
+//Play game function which renders the board to html and builds empty array for board, x and circle
+//Builds out the cells with unique IDs and same class that will change to x class or circle class as played
+
 playGame()
 
 function playGame ()
 {
-/*/Build out gameboard layout with functionality such as click events to apply either 
-either x or circle tokens
-A continuous loop occurs, which will assign to DOM id elements that will be referenced
-later for toke assigning as well as used for identification of the winner
-*/
+
 for (let i=0; i<=8; i++)
 {
     let cell = document.createElement("div")
@@ -53,8 +75,8 @@ for (let i=0; i<=8; i++)
 
 //Counter established to alternate turns in the game betweene x and circle
 let count = 1
-//whosTurn defines current turn in the game based counter
-let whosTurn 
+
+//Add x or circle cells to gameboard
 function handleCellClick(event, cellNumber)
 {
     let cellON = document.getElementById(`cell-${cellNumber}`)
@@ -69,6 +91,7 @@ function handleCellClick(event, cellNumber)
         cellON.setAttribute('class', whosTurn)
         gameBoard[cellNumber]= whosTurn
 //Add to array for x and circle to check against index of winnning patterns
+//This will be used to index winning patterns to see if winner is x or circle.
         if (whosTurn == xToken)
         {
             xPlayer[cellNumber] = cellNumber
@@ -86,7 +109,7 @@ function handleCellClick(event, cellNumber)
 }
 
 
-
+//Check for winner by referencing winner function for x or circle, and if none, then check for tie
 function checkWinner ()
 {
 
@@ -109,7 +132,11 @@ function checkWinner ()
         }
 }
 
-let winnerIs;
+//Counter is to add to html and associate with Player X or Player Circle
+let gamesWonX = 0
+let gamesWonCircle = 0
+
+//Check for winner x or circle through indexing a patter of winners.
 
 function whoWinner()
 {
@@ -144,7 +171,7 @@ function whoWinner()
                         document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
                         //Reset game and gameboard
                         document.getElementById('replay').addEventListener('click', refreshGame);
-                        return winnerIs = "circle";
+                        return gamesWonCircle = gamesWonCircle + 1;
                       
                     }
                     else if (countX == 3) 
@@ -153,7 +180,7 @@ function whoWinner()
                         document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
                     //  Reset game and gameboard
                         document.getElementById('replay').addEventListener('click', refreshGame);
-                        return winnerIs = "x";
+                        return gamesWonX = gamesWonX + 1;
                     }   
 
                 }
