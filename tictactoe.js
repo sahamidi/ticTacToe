@@ -1,3 +1,13 @@
+
+document.getElementById('buttonPlayers').addEventListener('click', addPlayer, {once: true})
+
+function addPlayer()
+{
+    xName = document.getElementById('playerName1').value
+    circleName = document.getElementById('playerName2').value
+}
+
+
 let circleToken = "cell circle"
 let xToken = "cell x"
 //Empty arrays for game board, xplayer played spots and circle player game spots
@@ -19,37 +29,15 @@ function refreshGame()
         }
 }
 
-
-//NEED HELP, WHY IS THIS BUBBLING UP TO TOP OF CODE. PURPOSE IS TO ADD PLAYERS, AND KEEP COUNT OF SCORE
-let addPlayers = document.getElementById('buttonPlayers')
-
-
-function addPlayer()
-{
-    let playerInput = document.getElementById('playerName1').value
-    return document.getElementById('player1Is').innerText = playerInput
-}
-
-addPlayers.addEventListener('click',addPlayer)
-
-
-
-
-
-
-
-
-
-
-
-
 //Play game function which renders the board to html and builds empty array for board, x and circle
-//Builds out the cells with unique IDs and same class that will change to x class or circle class as played
-
+//Builds out the cells with unique IDs and same class that will change to x class or circle class as playe
 playGame()
+
 
 function playGame ()
 {
+
+
 
 for (let i=0; i<=8; i++)
 {
@@ -168,7 +156,7 @@ function whoWinner()
                     if (countCircle == 3)
                     {
                         document.getElementById("winner").style.display = 'block'; 
-                        document.getElementById("announceWinner").innerText = "Circle is the Winner. click to Replay"
+                        document.getElementById("announceWinner").innerText = `${circleName} is the Winner. click to Replay`
                         //Reset game and gameboard
                         document.getElementById('replay').addEventListener('click', refreshGame);
                         return gamesWonCircle = gamesWonCircle + 1;
@@ -177,7 +165,7 @@ function whoWinner()
                     else if (countX == 3) 
                     {
                         document.getElementById("winner").style.display = 'block'; 
-                        document.getElementById("announceWinner").innerText = "X is the Winner. click to Replay"
+                        document.getElementById("announceWinner").innerText = `${xName} is the Winner. click to Replay`
                     //  Reset game and gameboard
                         document.getElementById('replay').addEventListener('click', refreshGame);
                         return gamesWonX = gamesWonX + 1;
